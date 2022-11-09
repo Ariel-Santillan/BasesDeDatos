@@ -2,21 +2,21 @@ package com.example.demo.Model;
 
 import java.util.Date;
 import javax.persistence.*;
-@Entity
-@Table(name="Contenido")
+//@Entity
+//@Table(name="Contenido")
+
 public abstract class Contenido {
     @Id
     Long id_contenido;
     String titulo;
-
     Date fecha_publicacion;
 
     String extension;
      public Contenido(Long id_contenido,String titulo,Date fecha_publicacion,String extension){
          this.id_contenido=id_contenido;
          this.titulo=titulo;
-        this.fecha_publicacion=fecha_publicacion;
-        this.extension=extension;
+         this.fecha_publicacion=fecha_publicacion;
+         this.extension=extension;
     }
     abstract void create (int idContenido, String titulo, Date fecha_publicacion, String extension);
     abstract void modify (int idContenido, String titulo, Date fecha_publicacion, String extension);
@@ -44,7 +44,6 @@ class Descargable extends Contenido{
     }
 }
 class Video extends Contenido {
-    Float tamanio;
 
     public Video(Long id_contenido,String titulo,Date fecha_publicacion,String extension) {
         // uso del constructor de la clase abstracta
@@ -68,7 +67,6 @@ class Video extends Contenido {
 }
 
 class Documento extends Descargable {
-    boolean usa_plantilla;
 
     public Documento(Long id_contenido,String titulo,Date fecha_publicacion,String extension) {
         // uso del constructor de la clase abstracta
@@ -92,7 +90,6 @@ class Documento extends Descargable {
 }
 
 class Musica extends Descargable {
-    String calidad;
 
     public Musica(Long id_contenido,String titulo,Date fecha_publicacion,String extension) {
         // uso del constructor de la clase abstracta

@@ -13,7 +13,9 @@ public class ContenidoService {
     @Autowired
     ContenidoRepository contenidoRepository;
 
-    public List<Contenido> encontrarTodos() {
-        return contenidoRepository.encontrarTodos();
+    public List<Contenido> getContenidos() {
+        return contenidoRepository.getContenidos();
     }
+
+    public void deleteContenidoByID(Long id) { contenidoRepository.deleteContenidoByID(id);}
 }
