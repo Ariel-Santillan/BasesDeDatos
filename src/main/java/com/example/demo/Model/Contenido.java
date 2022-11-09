@@ -1,11 +1,10 @@
-package com.example.demo;
+package com.example.demo.Model;
 
-import javax.persistence.GeneratedValue;
 import java.util.Date;
 import javax.persistence.*;
 @Entity
 @Table(name="Contenido")
-abstract class Contenido {
+public abstract class Contenido {
     @Id
     Long id_contenido;
     String titulo;
