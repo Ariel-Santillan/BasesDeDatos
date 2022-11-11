@@ -25,15 +25,8 @@ class ContenidoGenController {
 
     @DeleteMapping("/delete/{id}")
     fun delete(@PathVariable id: Long): String? {
-        contenidoRepository.eliminarContenido(id) //
+        contenidoGService.eliminarUnContenido(id) //
         return "Contenido eliminado"
-    }
-    //SOLUCION NO VALIDA PARA ENTREGAR. HAY QUE USAR QUERY NATIVE
-    //debe existir el service de por medio
-    @PostMapping("/guardarContenido")
-    fun saveContenido(@RequestBody contenidoG: ContenidoG): String {
-        contenidoRepository.save(contenidoG)
-        return "Contenido guardado"
     }
 
     @PostMapping("/guardarElContenido")
@@ -41,21 +34,17 @@ class ContenidoGenController {
         contenidoGService.guardarContenido(contenidoG)
         return "Contenido guardado"
     }
-    /*
+
     @PutMapping("/actualizarContenido/{id}")
     fun updateTask(@PathVariable id: Long, @RequestBody contenidoG: ContenidoG): String? {
-        contenidoGService.
+        contenidoGService.actualizarContenido(id, contenidoG)
 
         return "contenido actualizado"
     }
-    */
+
     @GetMapping("/obtenerContenidoPorID/{id}")
     fun buscarXID(@PathVariable id: Long): ContenidoG {
         return contenidoRepository.buscarContenidoPorId(id)
     }
-
-
-
-
 
 }

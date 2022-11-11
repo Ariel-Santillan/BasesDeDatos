@@ -30,8 +30,8 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
         nativeQuery = true
     )
     fun eliminarContenido(@Param("id") id :Long)
-    //GUARDAR UN CONTENIDO
 
+    //GUARDAR UN CONTENIDO
     @Modifying
     @Transactional
     @Query(
@@ -42,11 +42,11 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
                          @Param("extension") extension: String
     )
 
-    //Actualizar un contenido . No esta implementado aun. Si es necesario cambiarlo mandale
+    //ACTUALIZAR UN CONTENIDO
     @Modifying
     @Transactional
     @Query(
-        value = "UPDATE contenido SET TITULO = ':titulo', EXTENSION = ':extension' WHERE ID_CONTENIDO = :id" ,
+        value = "UPDATE contenido SET TITULO = :titulo, EXTENSION = :extension WHERE ID_CONTENIDO = :id" ,
         nativeQuery = true
     )
     fun actualizarContenido(@Param("titulo") titulo: String ,

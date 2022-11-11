@@ -21,14 +21,14 @@ class ContenidoGService {
     }
 
     fun eliminarUnContenido(id : Long) : String{
-       // contenidoGRepository.eliminarContenido(id)
+        contenidoGRepository.eliminarContenido(id)
         return "Contenido eliminado"
     }
 
     fun actualizarContenido(id : Long , contenidoG: ContenidoG){
+        val contenidoEncontrado = contenidoGRepository.buscarContenidoPorId(id)
         val titulo = contenidoG.TITULO
         val extension = contenidoG.EXTENSION
-        val id = contenidoG.ID_CONTENIDO
-        contenidoGRepository.actualizarContenido(titulo,extension,id)
+        contenidoGRepository.actualizarContenido(titulo,extension,contenidoEncontrado.ID_CONTENIDO)
     }
 }
