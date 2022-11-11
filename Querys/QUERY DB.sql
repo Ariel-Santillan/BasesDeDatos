@@ -87,8 +87,12 @@ CREATE TABLE COMENTARIO (
     ,PRIMARY KEY (ID_COMENTARIO)
     ,FOREIGN KEY (ID_CONTENIDO)
         REFERENCES CONTENIDO(ID_CONTENIDO)
+            on Delete CASCADE
+            on update cascade
     ,FOREIGN KEY (ID_USUARIO)
         REFERENCES USUARIO(ID_USUARIO)
+        on delete cascade
+        on update cascade
 
 );
 
