@@ -5,6 +5,7 @@ import com.example.tpBD.repository.ContenidoGRepository
 import com.example.tpBD.service.ContenidoGService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 
 @RestController
@@ -30,8 +31,8 @@ class ContenidoGenController {
     }
 
     @PostMapping("/guardarElContenido")
-    fun guardarContenido(@RequestBody contenidoG: ContenidoG): String {
-        contenidoGService.guardarContenido(contenidoG)
+    fun guardarContenido(@RequestPart("contenidoG") contenidoG: ContenidoG, @RequestPart("archivo") archivo: MultipartFile): String {
+        contenidoGService.guardarContenido(contenidoG, archivo.bytes)
         return "Contenido guardado"
     }
 

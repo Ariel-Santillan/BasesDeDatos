@@ -35,11 +35,12 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
     @Modifying
     @Transactional
     @Query(
-        value = "INSERT  CONTENIDO (TITULO,EXTENSION) VALUES(:titulo,:extension)" ,
+        value = "INSERT  CONTENIDO (TITULO,EXTENSION,URL) VALUES(:titulo,:extension, :url)" ,
         nativeQuery = true
     )
     fun agregarContenido(@Param("titulo") titulo: String ,
-                         @Param("extension") extension: String
+                         @Param("extension") extension: String,
+                         url: String
     )
 
     //ACTUALIZAR UN CONTENIDO

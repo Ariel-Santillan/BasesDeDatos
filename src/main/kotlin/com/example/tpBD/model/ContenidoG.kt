@@ -11,12 +11,12 @@ class ContenidoG {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var ID_CONTENIDO: Long = 0
-
     @Column
     var TITULO: String = ""
-
     @Column
     var EXTENSION: String = ""
+    @Column(name = "URL")
+    var url: String = ""
 }
 
 @Entity
@@ -33,4 +33,5 @@ abstract class Contenido{
     var EXTENSION : String = ""
     @Column
     var FECHA_PUBLICADO : LocalDate = LocalDate.now()
+
 }
