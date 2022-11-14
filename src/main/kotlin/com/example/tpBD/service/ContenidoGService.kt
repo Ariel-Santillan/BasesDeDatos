@@ -1,6 +1,5 @@
 package com.example.tpBD.service
 
-import com.example.tpBD.model.Contenido
 import com.example.tpBD.model.ContenidoG
 import com.example.tpBD.repository.ContenidoGRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -42,7 +41,7 @@ class ContenidoGService {
         val titulo = contenidoG.TITULO
         val extension = contenidoG.EXTENSION
         modificarNombreArchivoEnFileSystem(contenidoEncontrado, contenidoG)
-        contenidoGRepository.actualizarContenido(titulo,extension,contenidoEncontrado.ID_CONTENIDO)
+        contenidoGRepository.actualizarContenido(titulo,extension,contenidoEncontrado.idContenido)
     }
 
     private fun modificarNombreArchivoEnFileSystem(contenidoEncontrado: ContenidoG, contenidoG: ContenidoG) {

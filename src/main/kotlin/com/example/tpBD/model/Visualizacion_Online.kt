@@ -26,12 +26,4 @@ class Visualizacion_Online {
 
     @Column
     var HORA_FIN: LocalTime = LocalTime.now()
-
-    @ManyToMany
-    @JoinTable(
-        name ="mira",
-        joinColumns = arrayOf(JoinColumn(name = "ID_VISUALIZACION")),
-        inverseJoinColumns = arrayOf(JoinColumn(name = "ID_CONTENIDO"))
-    )
-    var mirado: List<Video> = listOf()
 }
