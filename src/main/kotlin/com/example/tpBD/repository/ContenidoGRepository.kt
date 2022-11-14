@@ -62,4 +62,14 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
         nativeQuery = true
     )
     fun  buscarPorCategoria(@Param("categoria") categoria :Number) : List<ContenidoG>
+
+    @Query(value = "SELECT DISTINCT cont.*\n" +
+            "from SE_CLASIFICA_EN claf\n" +
+            "         INNER JOIN contenido cont " +
+            "ON cont.ID_CONTENIDO = claf.ID_CONTENIDO\n" +
+            "         INNER JOIN categoria cat " +
+            "ON cat.ID_CATEGORIA = claf.ID_CATEGORIA\n" +
+            "WHERE cat.TIPO IN :categorias\n" +
+            "order by cont.ID_CONTENIDO DESC", nativeQuery = true)
+    fun buscarPorCategorias(categorias :List<String>) :List<ContenidoG>
 }
