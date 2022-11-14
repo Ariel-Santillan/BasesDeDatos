@@ -4,11 +4,14 @@ import com.example.tpBD.model.ContenidoG
 import com.example.tpBD.repository.ContenidoGRepository
 import com.example.tpBD.service.ContenidoGService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.web.server.MimeMappings
+import org.springframework.util.MimeType
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 
 @RestController
+@CrossOrigin
 class ContenidoGenController {
     @Autowired
     lateinit var contenidoGService : ContenidoGService
@@ -56,6 +59,10 @@ class ContenidoGenController {
             "Audio", "Documentos" -> categoriaNumber = 2
         }
         return contenidoGService.buscarPorCategoria(categoriaNumber)
+    }
+    @GetMapping("/contenidos-por-categoria")
+    fun buscarPorCategorias(@RequestBody categorias: List<String>): List<ContenidoG> {
+        return contenidoGService.buscarPorCategorias(categorias)
     }
 
 }
