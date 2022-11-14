@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
 
-interface ReporteRepository :JpaRepository<Reporte, Long> {
-
-    @Query(value = "")
-    fun buscarReporte()
-}
+//interface ReporteRepository :JpaRepository<Reporte, Long> {
+//
+//    @Query(value = "")
+//    fun buscarReporte()
+//}

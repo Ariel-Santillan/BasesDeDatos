@@ -8,8 +8,8 @@ import javax.persistence.*
 class Descarga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var ID_DESCARGA: Long = 0
-    @Column
-    var VELOCIDAD_TRANSFERENCIA: String = ""
-
+    @Column(name = "ID_DESCARGA")
+    var id: Long = 0
+    @Column(name = "VELOCIDAD_TRANSFERENCIA")
+    var velocidadTransferencia: String = ""
 }
