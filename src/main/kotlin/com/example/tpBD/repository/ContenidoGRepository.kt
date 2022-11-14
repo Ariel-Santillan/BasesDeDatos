@@ -55,4 +55,11 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
                             @Param("id") id : Long
     )
 
+
+    //FILTRAR POR CATEGORIA
+    @Query(
+        value = "select * from contenido  where ID_TIPO_CONTENIDO = :categoria",
+        nativeQuery = true
+    )
+    fun  buscarPorCategoria(@Param("categoria") categoria :Number) : List<ContenidoG>
 }

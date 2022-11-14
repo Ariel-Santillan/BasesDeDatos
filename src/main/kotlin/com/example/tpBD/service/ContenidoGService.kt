@@ -60,4 +60,8 @@ class ContenidoGService {
     = "$rutaBaseContenidos$rutaContenidos/${obtenerNombreArchivo(contenidoG)}"
     private fun obtenerNombreArchivo(contenidoG: ContenidoG) :String
     = "${contenidoG.TITULO}.${contenidoG.EXTENSION.lowercase()}"
+
+    fun buscarPorCategoria(categoria: Number): List<ContenidoG> {
+        return contenidoGRepository.buscarPorCategoria(categoria)
+    }
 }

@@ -48,4 +48,14 @@ class ContenidoGenController {
         return contenidoRepository.buscarContenidoPorId(id)
     }
 
+    @GetMapping("/obtenerContenidosPorCategoria/{categoria}")
+    fun buscarXCategoria(@PathVariable categoria: String): List<ContenidoG> {
+        var categoriaNumber = 0
+        when (categoria) {
+            "Video" -> categoriaNumber = 1
+            "Audio", "Documentos" -> categoriaNumber = 2
+        }
+        return contenidoGService.buscarPorCategoria(categoriaNumber)
+    }
+
 }
