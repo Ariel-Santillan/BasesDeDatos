@@ -1,6 +1,8 @@
 package com.example.tpBD.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.*
 
 //Temporal . Hay que crear la clase abstrracta Contenido con sus clases  hijos
@@ -17,6 +19,9 @@ class ContenidoG {
     var EXTENSION: String = ""
     @Column(name = "URL")
     var url: String = ""
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "FECHA_PUBLICADO")
+    var fechaPublicacion: LocalDateTime = LocalDateTime.now()
 }
 
 @Entity
