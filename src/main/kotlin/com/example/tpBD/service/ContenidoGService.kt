@@ -23,8 +23,8 @@ class ContenidoGService {
     }
 
     fun guardarContenido(contenidoG: ContenidoG, archivo: ByteArray){
-        val titulo = contenidoG.TITULO
-        val extension = contenidoG.EXTENSION
+        val titulo = contenidoG.titulo
+        val extension = contenidoG.extension
 
         persitirEnFileSystem(contenidoG, archivo)
         var url :String = "${obtenerRutaCompletaArchivo(contenidoG)}"
@@ -40,8 +40,8 @@ class ContenidoGService {
 
     fun actualizarContenido(id : Long , contenidoG: ContenidoG){
         val contenidoEncontrado = contenidoGRepository.buscarContenidoPorId(id)
-        val titulo = contenidoG.TITULO
-        val extension = contenidoG.EXTENSION
+        val titulo = contenidoG.titulo
+        val extension = contenidoG.extension
         modificarNombreArchivoEnFileSystem(contenidoEncontrado, contenidoG)
         contenidoGRepository.actualizarContenido(titulo,extension,contenidoEncontrado.idContenido)
     }
@@ -54,7 +54,8 @@ class ContenidoGService {
     private fun persitirEnFileSystem(contenidoG :ContenidoG, archivo: ByteArray) {
         var rutaArchivo :String = "$rutaBaseContenidos$rutaContenidos/"
         Files.createDirectories(File(rutaArchivo).toPath())
-        File("${obtenerRutaCompletaArchivo(contenidoG)}").writeBytes(archivo)
+        var file = File("${obtenerRutaCompletaArchivo(contenidoG)}")
+        file.writeBytes(archivo)
     }
 
     private fun eliminarArchivoAsociadoDelFileSystem(contenidoG: ContenidoG) {
@@ -64,7 +65,7 @@ class ContenidoGService {
     private fun obtenerRutaCompletaArchivo(contenidoG: ContenidoG) :String
     = "$rutaBaseContenidos$rutaContenidos/${obtenerNombreArchivo(contenidoG)}"
     private fun obtenerNombreArchivo(contenidoG: ContenidoG) :String
-    = "${contenidoG.TITULO}.${contenidoG.EXTENSION.lowercase()}"
+    = "${contenidoG.titulo}.${contenidoG.titulo.lowercase()}"
 
     fun buscarPorCategoria(categoria: Number): List<ContenidoG> {
         return contenidoGRepository.buscarPorCategoria(categoria)

@@ -15,10 +15,10 @@ class ContenidoG {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_CONTENIDO")
     var idContenido: Long = 0
-    @Column
-    var TITULO: String = ""
-    @Column
-    var EXTENSION: String = ""
+    @Column(name = "TITULO")
+    var titulo: String = ""
+    @Column(name = "EXTENSION")
+    var extension: String = ""
     @Column(name = "URL")
     var url: String = ""
     @JsonFormat(pattern = "dd/MM/yyyy")
