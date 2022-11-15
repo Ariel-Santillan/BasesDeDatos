@@ -69,7 +69,12 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
             "ON cont.ID_CONTENIDO = claf.ID_CONTENIDO\n" +
             "         INNER JOIN categoria cat " +
             "ON cat.ID_CATEGORIA = claf.ID_CATEGORIA\n" +
-            "WHERE cat.TIPO IN :categorias\n" +
+            "WHERE cat.TIPO IN (:categoria)\n" +
             "order by cont.ID_CONTENIDO DESC", nativeQuery = true)
-    fun buscarPorCategorias(categorias :List<String>) :List<ContenidoG>
+    fun buscarPorCategorias(categoria :String) :List<ContenidoG>
+
+    @Query(value = "SELECT *\n" +
+            "FROM CONTENIDO\n" +
+            "WHERE TITULO LIKE %:titulo%", nativeQuery = true)
+    fun buscarPorTitulo(@Param("titulo") titulo: String) :List<ContenidoG>
 }

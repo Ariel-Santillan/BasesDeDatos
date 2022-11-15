@@ -64,7 +64,11 @@ class ContenidoGService {
         return contenidoGRepository.buscarPorCategoria(categoria)
     }
 
-    fun buscarPorCategorias(categorias :List<String>) :List<ContenidoG> {
-        return contenidoGRepository.buscarPorCategorias(categorias)
+    fun buscarPorCategorias(categoria :String) :List<ContenidoG> {
+        return contenidoGRepository.buscarPorCategorias(categoria)
+    }
+
+    fun buscarPorTitulo(titulo :String) :List<ContenidoG> {
+        return contenidoGRepository.buscarPorTitulo(titulo)
     }
 }

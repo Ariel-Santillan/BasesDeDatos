@@ -27,6 +27,10 @@ class ContenidoGenController {
         return contenidoGService.obtenerTodosLosContenidos()
     }
 
+    @GetMapping("/contenidos-por-titulo")
+    fun buscarPorTitulo(@RequestParam titulo :String): List<ContenidoG> {
+        return contenidoGService.buscarPorTitulo(titulo)
+    }
     @DeleteMapping("/delete/{id}")
     fun delete(@PathVariable id: Long): String? {
         contenidoGService.eliminarUnContenido(id) //
@@ -61,8 +65,8 @@ class ContenidoGenController {
         return contenidoGService.buscarPorCategoria(categoriaNumber)
     }
     @GetMapping("/contenidos-por-categoria")
-    fun buscarPorCategorias(@RequestBody categorias: List<String>): List<ContenidoG> {
-        return contenidoGService.buscarPorCategorias(categorias)
+    fun buscarPorCategorias(@RequestParam categoria: String): List<ContenidoG> {
+        return contenidoGService.buscarPorCategorias(categoria)
     }
 
 }
