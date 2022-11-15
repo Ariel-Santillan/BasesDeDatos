@@ -11,5 +11,8 @@ class DescargaService {
     @Autowired
     lateinit var descargaRepository: DescargaRepository
 
-    fun crear(descarga :Descarga) = descargaRepository.crear(descarga.id, descarga.velocidadTransferencia)
+    fun crear(descarga :Descarga) {
+        var velocidadTransferencia = descarga.velocidadTransferencia
+        descargaRepository.crear(descarga.id, velocidadTransferencia)
+    }
 }
