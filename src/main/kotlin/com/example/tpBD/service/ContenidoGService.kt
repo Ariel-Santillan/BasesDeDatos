@@ -32,6 +32,8 @@ class ContenidoGService {
     }
 
     fun eliminarUnContenido(id : Long) : String{
+        var contenidoABorrar = contenidoGRepository.buscarContenidoPorId(id)
+        eliminarArchivoAsociadoDelFileSystem(contenidoABorrar)
         contenidoGRepository.eliminarContenido(id)
         return "Contenido eliminado"
     }
@@ -53,6 +55,10 @@ class ContenidoGService {
         var rutaArchivo :String = "$rutaBaseContenidos$rutaContenidos/"
         Files.createDirectories(File(rutaArchivo).toPath())
         File("${obtenerRutaCompletaArchivo(contenidoG)}").writeBytes(archivo)
+    }
+
+    private fun eliminarArchivoAsociadoDelFileSystem(contenidoG: ContenidoG) {
+        Files.deleteIfExists(File(obtenerRutaCompletaArchivo(contenidoG)).toPath())
     }
 
     private fun obtenerRutaCompletaArchivo(contenidoG: ContenidoG) :String
