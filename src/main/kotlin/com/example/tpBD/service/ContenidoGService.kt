@@ -65,7 +65,7 @@ class ContenidoGService {
         Files.deleteIfExists(File(obtenerRutaCompletaArchivo(contenidoG)).toPath())
     }
 
-    private fun obtenerRutaCompletaArchivo(contenidoG: ContenidoG) :String
+    fun obtenerRutaCompletaArchivo(contenidoG: ContenidoG) :String
     = "$rutaBaseContenidos$rutaContenidos/${obtenerNombreArchivo(contenidoG)}"
     private fun obtenerRutaDescargaArchivo(contenidoG: ContenidoG) :String
     = "/contenidos/${obtenerNombreArchivo(contenidoG)}"

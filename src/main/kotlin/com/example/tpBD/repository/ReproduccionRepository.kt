@@ -11,9 +11,9 @@ import java.time.LocalTime
 interface ReproduccionRepository : JpaRepository<Reproduccion, Long>{
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO es_reproducido VALUES( :id_reproduccion, :id_usuario, :id_contenido, :so_usado, :fecha_inicio, :fecha_fin, :hora_inicio, :hora_fin)", nativeQuery = true)
-    fun crear(id_reproduccion:Long,
-              id_usuario: Long,
+    @Query(value = "INSERT INTO es_reproducido (ID_USUARIO,ID_CONTENIDO,SISTEMA_OPERATIVO_USADO,FECHA_INICIO,FECHA_FIN,HORA_INICIO,HORA_FIN) " +
+            "VALUES(:id_usuario, :id_contenido, :so_usado, :fecha_inicio, :fecha_fin, :hora_inicio, :hora_fin)", nativeQuery = true)
+    fun crear(id_usuario: Long,
               id_contenido: Long,
               so_usado: String,
               fecha_inicio: LocalDate,

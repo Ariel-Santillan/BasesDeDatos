@@ -11,7 +11,7 @@ class ReproduccionService {
     lateinit var reproduccionRepository: ReproduccionRepository
 
     fun crear(reproduccion: Reproduccion) {
-        reproduccionRepository.crear(reproduccion.id, reproduccion.id_usuario, reproduccion.id_contenido, reproduccion.so_usado, reproduccion.fecha_inicio, reproduccion.fecha_fin, reproduccion.hora_inicio, reproduccion.hora_fin)
+        reproduccionRepository.crear(reproduccion.idUsuario, reproduccion.idContenido, reproduccion.soUsado, reproduccion.fechaInicio, reproduccion.fechaFin, reproduccion.horaInicio, reproduccion.horaFin)
     }
 
 }
