@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.LocalDateTime
+import java.util.*
 
 @Service
 class ContenidoGService {
@@ -15,6 +17,7 @@ class ContenidoGService {
     @Value("\${tp.bd.contenidos}")
     private final var rutaBaseContenidos :String = ""
     private final var rutaContenidos :String = "/public/contenidos"
+    private final var extensionesVideo :List<String> = Arrays.asList("MP4", "WAV", "AVI")
     @Autowired
     lateinit var contenidoGRepository: ContenidoGRepository
 
@@ -25,10 +28,10 @@ class ContenidoGService {
     fun guardarContenido(contenidoG: ContenidoG, archivo: ByteArray){
         val titulo = contenidoG.titulo
         val extension = contenidoG.extension
-
+        val idTipo = if (esVisualizacion(contenidoG)) 2 else 1
         persitirEnFileSystem(contenidoG, archivo)
         var url :String = "${obtenerRutaCompletaArchivo(contenidoG)}"
-        contenidoGRepository.agregarContenido(titulo, extension, url)
+        contenidoGRepository.agregarContenido(titulo, LocalDateTime.now(), extension, url, idTipo)
     }
 
     fun eliminarUnContenido(id : Long) : String{
@@ -67,6 +70,9 @@ class ContenidoGService {
     private fun obtenerNombreArchivo(contenidoG: ContenidoG) :String
     = "${contenidoG.titulo}.${contenidoG.titulo.lowercase()}"
 
+    private fun esVisualizacion(contenidoG: ContenidoG) :Boolean {
+        return extensionesVideo.contains(contenidoG.extension)
+    }
     fun buscarPorCategoria(categoria: Number): List<ContenidoG> {
         return contenidoGRepository.buscarPorCategoria(categoria)
     }
