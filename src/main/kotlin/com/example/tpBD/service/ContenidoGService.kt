@@ -30,7 +30,7 @@ class ContenidoGService {
         val extension = contenidoG.extension
         val idTipo = if (esVisualizacion(contenidoG)) 2 else 1
         persitirEnFileSystem(contenidoG, archivo)
-        var url :String = "${obtenerRutaCompletaArchivo(contenidoG)}"
+        var url :String = "${obtenerRutaDescargaArchivo(contenidoG)}"
         contenidoGRepository.agregarContenido(titulo, LocalDateTime.now(), extension, url, idTipo)
     }
 
@@ -67,8 +67,10 @@ class ContenidoGService {
 
     private fun obtenerRutaCompletaArchivo(contenidoG: ContenidoG) :String
     = "$rutaBaseContenidos$rutaContenidos/${obtenerNombreArchivo(contenidoG)}"
+    private fun obtenerRutaDescargaArchivo(contenidoG: ContenidoG) :String
+    = "/contenidos/${obtenerNombreArchivo(contenidoG)}"
     private fun obtenerNombreArchivo(contenidoG: ContenidoG) :String
-    = "${contenidoG.titulo}.${contenidoG.titulo.lowercase()}"
+    = "${contenidoG.titulo}.${contenidoG.extension.lowercase()}"
 
     private fun esVisualizacion(contenidoG: ContenidoG) :Boolean {
         return extensionesVideo.contains(contenidoG.extension)
