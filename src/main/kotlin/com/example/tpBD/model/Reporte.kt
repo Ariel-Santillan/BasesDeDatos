@@ -1,13 +1,16 @@
 package com.example.tpBD.model
 
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-@Entity
-class Reporte {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
-}
+class Reporte(
+//    var id: Long,
+    var tipo: String,
+    var extension: String,
+    var cantidadVisualizaciones: Long,
+    var cantidadDescargas: Long,
+    var categorias: String
+)
