@@ -4,10 +4,15 @@ import com.example.tpBD.model.ContenidoG
 import com.example.tpBD.repository.ContenidoGRepository
 import com.example.tpBD.service.ContenidoGService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.web.server.MimeMappings
-import org.springframework.util.MimeType
+import org.springframework.core.io.InputStreamResource
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
+import java.io.FileInputStream
+import java.nio.file.Files
 
 
 @RestController
@@ -37,7 +42,7 @@ class ContenidoGenController {
         return "Contenido eliminado"
     }
 
-    @PostMapping("/guardarElContenido")
+    @PostMapping("/guardar-el-contenido")
     fun guardarContenido(@RequestPart("contenidoG") contenidoG: ContenidoG, @RequestPart("archivo") archivo: MultipartFile): String {
         contenidoGService.guardarContenido(contenidoG, archivo.bytes)
         return "Contenido guardado"
@@ -52,7 +57,25 @@ class ContenidoGenController {
 
     @GetMapping("/obtenerContenidoPorID/{id}")
     fun buscarXID(@PathVariable id: Long): ContenidoG {
+        println(contenidoRepository.buscarContenidoPorId(id))
         return contenidoRepository.buscarContenidoPorId(id)
+    }
+
+    @GetMapping("/descargar/{id}")
+    fun descargar(@PathVariable id: Long): ResponseEntity<InputStreamResource> {
+        println(id)
+        var contenido = contenidoRepository.buscarContenidoPorId(id)
+        var rutaArchivo = contenidoGService.obtenerRutaCompletaArchivo(contenido)
+        var rutaArchivoBytes = Files.readAllBytes(File(rutaArchivo).toPath())
+        val archivo = File(rutaArchivo)
+        val resource = InputStreamResource(FileInputStream(archivo))
+        val headers: HttpHeaders = HttpHeaders()
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + contenido.titulo + "." +contenido.extension)
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 
  /*   @GetMapping("/obtenerContenidosPorCategoria/{categoria}")
