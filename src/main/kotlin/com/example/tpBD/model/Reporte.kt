@@ -7,7 +7,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 class Reporte(
-//    var id: Long,
+    var id_contenido: Long,
     var tipo: String,
     var extension: String,
     var cantidadVisualizaciones: Long,
