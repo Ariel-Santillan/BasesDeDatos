@@ -14,7 +14,7 @@ class Reproduccion {
     @Column(name = "ID_USUARIO")
     var idUsuario: Long = 1
     @Column(name = "ID_CONTENIDO")
-    var idContenido: Long = 0
+    var idContenido: Long = 1
     @Column(name = "SISTEMA_OPERATIVO_USADO")
     var soUsado: String = ""
     @Column(name = "FECHA_INICIO")
