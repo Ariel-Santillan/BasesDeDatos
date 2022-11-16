@@ -1,12 +1,10 @@
 package com.example.tpBD.controller
 
 import com.example.tpBD.model.Descarga
+import com.example.tpBD.model.DescargaVo
 import com.example.tpBD.service.DescargaService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @CrossOrigin
 @RestController
@@ -15,7 +13,7 @@ class DescargaController {
     lateinit var descargaService: DescargaService
 
     @PostMapping("/descarga")
-    fun crear(@RequestBody descarga :Descarga) {
-        descargaService.crear(descarga)
+    fun crear(@RequestBody descargaVo: DescargaVo) {
+        descargaService.crear(descargaVo.velocidadTransferencia, descargaVo.idContenido)
     }
 }
