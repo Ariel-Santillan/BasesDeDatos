@@ -93,16 +93,11 @@ CREATE TABLE USUARIO (
 
 );
 
-CREATE TABLE DESCARGA(
-                         ID_DESCARGA     INT NOT NULL AUTO_INCREMENT
-    ,VELOCIDAD_TRANSFERENCIA NUMERIC
-    ,ID_USUARIO INT
-    ,PRIMARY KEY(ID_DESCARGA)
-    ,FOREIGN KEY (ID_USUARIO)
-                             REFERENCES USUARIO(ID_USUARIO)
-                             ON DELETE CASCADE
-                             ON UPDATE CASCADE
-);
+-- CREATE TABLE DESCARGA(
+--                          ID_DESCARGA     INT NOT NULL AUTO_INCREMENT
+--     ,VELOCIDAD_TRANSFERENCIA NUMERIC
+--     ,PRIMARY KEY(ID_DESCARGA)
+-- );
 
 CREATE TABLE CATEGORIA(
                           ID_CATEGORIA INT NOT NULL AUTO_INCREMENT
@@ -180,6 +175,20 @@ CREATE TABLE SE_CLASIFICA_EN(
 );
 
 
+CREATE TABLE ES_DESCARGADO (
+    ID_CONTENIDO INT
+    ,ID_USUARIO INT
+    ,VELOCIDAD_TRANSFERENCIA Float
+    ,FOREIGN KEY (ID_CONTENIDO)
+                                   REFERENCES CONTENIDO(ID_CONTENIDO)
+                                   ON DELETE CASCADE
+                                   ON UPDATE CASCADE
+    ,FOREIGN KEY (ID_USUARIO)
+                                   REFERENCES USUARIO(ID_USUARIO)
+                                   ON DELETE CASCADE
+                                   ON UPDATE CASCADE
+);
+
 CREATE TABLE RTA_ENCUESTA(
                              ID_RTA_ENCUESTA                    INT AUTO_INCREMENT UNIQUE
     ,PUNTAJE_GLOBAL                     NUMERIC
@@ -187,25 +196,16 @@ CREATE TABLE RTA_ENCUESTA(
     ,RESUMEN_NEGATIVO_PLATAFORMA        VARCHAR(50)
     ,RESUMEN_POSITIVO_DESCARGA          VARCHAR(50)
     ,RESUMEN_NEGATIVO_DESCARGA          VARCHAR(50)
-    ,ID_DESCARGA                        INT NULL
+    ,ID_CONTENIDO                       INT NULL
+    ,ID_USUARIO                         INT NULL
     ,PRIMARY KEY (ID_RTA_ENCUESTA)
-    ,FOREIGN KEY (ID_DESCARGA)
-                                 REFERENCES DESCARGA(ID_DESCARGA)
+    ,FOREIGN KEY (ID_CONTENIDO)
+                                 REFERENCES ES_DESCARGADO(ID_CONTENIDO)
                                  ON DELETE CASCADE
                                  ON UPDATE CASCADE
-
+    ,FOREIGN KEY (ID_USUARIO)
+                                 REFERENCES ES_DESCARGADO(ID_USUARIO)
+                                 ON DELETE CASCADE
+                                 ON UPDATE CASCADE
 );
 
-CREATE TABLE ES_DESCARGADO (
-                               ID_CONTENIDO INT
-    ,ID_DESCARGA INT
-    ,PRIMARY KEY (ID_CONTENIDO,ID_DESCARGA)
-    ,FOREIGN KEY (ID_CONTENIDO)
-                                   REFERENCES CONTENIDO(ID_CONTENIDO)
-                                   ON DELETE CASCADE
-                                   ON UPDATE CASCADE
-    ,FOREIGN KEY (ID_DESCARGA)
-                                   REFERENCES DESCARGA(ID_DESCARGA)
-                                   ON DELETE CASCADE
-                                   ON UPDATE CASCADE
-);
