@@ -44,7 +44,9 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
                          @Param("extension") extension: String,
                          url: String,
                          @Param("idTipo") idTipo :Int
-    )
+    ) :Int
+
+    fun findAllByOrderByIdContenido() :List<ContenidoG>
 
     //ACTUALIZAR UN CONTENIDO
     @Modifying

@@ -19,7 +19,6 @@ class ReporteRepository {
     fun buscarReporte(): List<Reporte> {
         var rowMapper: RowMapper<Reporte> = RowMapper<Reporte> { resultSet: ResultSet, index: Int ->
             Reporte(
-//                resultSet.getLong("id"),
                     resultSet.getString("TITULO"),
                     resultSet.getString("EXTENSION"),
                     resultSet.getLong("CANTIDAD_VISUALIZACIONES"),

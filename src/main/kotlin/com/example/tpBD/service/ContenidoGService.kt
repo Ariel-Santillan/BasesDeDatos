@@ -1,9 +1,11 @@
 package com.example.tpBD.service
 
+import com.example.tpBD.model.Categoria
 import com.example.tpBD.model.ContenidoG
 import com.example.tpBD.repository.ContenidoGRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Service
 import java.io.File
 import java.nio.file.Files
@@ -20,18 +22,20 @@ class ContenidoGService {
     private final var extensionesVideo :List<String> = Arrays.asList("MP4", "WAV", "AVI")
     @Autowired
     lateinit var contenidoGRepository: ContenidoGRepository
+    @Autowired
+    lateinit var jdbcTemplate: JdbcTemplate
 
     fun obtenerTodosLosContenidos(): List<ContenidoG> {
         return contenidoGRepository.todosLosContenidos()
     }
 
-    fun guardarContenido(contenidoG: ContenidoG, archivo: ByteArray){
+    fun guardarContenido(contenidoG: ContenidoG, archivo: ByteArray) :Int {
         val titulo = contenidoG.titulo
         val extension = contenidoG.extension
         val idTipo = if (esVisualizacion(contenidoG)) 2 else 1
         persitirEnFileSystem(contenidoG, archivo)
         var url :String = "${obtenerRutaDescargaArchivo(contenidoG)}"
-        contenidoGRepository.agregarContenido(titulo, LocalDateTime.now(), extension, url, idTipo)
+        return contenidoGRepository.agregarContenido(titulo, LocalDateTime.now(), extension, url, idTipo)
     }
 
     fun eliminarUnContenido(id : Long) : String{
@@ -48,6 +52,14 @@ class ContenidoGService {
         modificarNombreArchivoEnFileSystem(contenidoEncontrado, contenidoG)
         contenidoGRepository.actualizarContenido(titulo,extension,contenidoEncontrado.idContenido)
     }
+
+    fun guardarAsociacionContenidoCategoria(idContenido :Long, categorias :List<Categoria>) {
+        categorias.forEach { categoria: Categoria ->
+            jdbcTemplate.update("INSERT INTO se_clasifica_en VALUES ($idContenido,${categoria.id})")
+        }
+    }
+
+    fun buscarOrdenadosPorId() :List<ContenidoG> = contenidoGRepository.findAllByOrderByIdContenido()
 
     private fun modificarNombreArchivoEnFileSystem(contenidoEncontrado: ContenidoG, contenidoG: ContenidoG) {
         Files.move(File(obtenerRutaCompletaArchivo(contenidoEncontrado)).toPath(),

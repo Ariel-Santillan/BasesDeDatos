@@ -1,6 +1,8 @@
 package com.example.tpBD.controller
 
+import com.example.tpBD.model.Categoria
 import com.example.tpBD.model.ContenidoG
+import com.example.tpBD.model.ContenidoVo
 import com.example.tpBD.repository.ContenidoGRepository
 import com.example.tpBD.service.ContenidoGService
 import org.springframework.beans.factory.annotation.Autowired
@@ -43,8 +45,17 @@ class ContenidoGenController {
     }
 
     @PostMapping("/guardar-el-contenido")
-    fun guardarContenido(@RequestPart("contenidoG") contenidoG: ContenidoG, @RequestPart("archivo") archivo: MultipartFile): String {
+    fun guardarContenido(@RequestPart("contenidoG") contenidoVo: ContenidoVo, @RequestPart("archivo") archivo: MultipartFile): String {
+        var contenidoG :ContenidoG = ContenidoG()
+        contenidoG.titulo = contenidoVo.titulo
+        contenidoG.extension = contenidoVo.extension
+
+        var categorias :List<Categoria> = contenidoVo.categorias
+
         contenidoGService.guardarContenido(contenidoG, archivo.bytes)
+        var contenidos :List<ContenidoG> = contenidoGService.buscarOrdenadosPorId()
+        contenidoGService.guardarAsociacionContenidoCategoria(contenidos[0].idContenido, categorias)
+    // no tira error pero no funciona agregar la categoría
         return "Contenido guardado"
     }
 
