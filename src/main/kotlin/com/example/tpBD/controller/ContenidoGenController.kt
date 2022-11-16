@@ -55,7 +55,6 @@ class ContenidoGenController {
         contenidoGService.guardarContenido(contenidoG, archivo.bytes)
         var contenidos :List<ContenidoG> = contenidoGService.buscarOrdenadosPorId()
         contenidoGService.guardarAsociacionContenidoCategoria(contenidos[0].idContenido, categorias)
-    // no tira error pero no funciona agregar la categoría
         return "Contenido guardado"
     }
 

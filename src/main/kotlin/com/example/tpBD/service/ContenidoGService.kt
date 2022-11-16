@@ -59,7 +59,7 @@ class ContenidoGService {
         }
     }
 
-    fun buscarOrdenadosPorId() :List<ContenidoG> = contenidoGRepository.findAllByOrderByIdContenido()
+    fun buscarOrdenadosPorId() :List<ContenidoG> = contenidoGRepository.findAllByOrderByIdContenidoDesc()
 
     private fun modificarNombreArchivoEnFileSystem(contenidoEncontrado: ContenidoG, contenidoG: ContenidoG) {
         Files.move(File(obtenerRutaCompletaArchivo(contenidoEncontrado)).toPath(),

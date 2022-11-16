@@ -46,7 +46,7 @@ interface ContenidoGRepository : JpaRepository<ContenidoG , Long> {
                          @Param("idTipo") idTipo :Int
     ) :Int
 
-    fun findAllByOrderByIdContenido() :List<ContenidoG>
+    fun findAllByOrderByIdContenidoDesc() :List<ContenidoG>
 
     //ACTUALIZAR UN CONTENIDO
     @Modifying
