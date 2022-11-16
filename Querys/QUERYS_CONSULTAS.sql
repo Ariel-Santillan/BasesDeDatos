@@ -1,7 +1,7 @@
---Se lista los contenidos que son descargable
+-- Se lista los contenidos que son descargable
 select cont.*
 from contenido cont
-where cont.id_tipo_contenido = 2
+where cont.id_tipo_contenido = 2;
 
 
 -- Busqueda contenido por Extension de archivo
@@ -52,7 +52,7 @@ ORDER BY COUNT(ES_REPRODUCIDO.ID_CONTENIDO) DESC ;
 
 
 -- Cantidad de veces que se descargo y visualizaron los archivos
---Ordenar archivos (no importa su tipo o categoría) por cantidad de descargas de mayor a menor
+-- Ordenar archivos (no importa su tipo o categoría) por cantidad de descargas de mayor a menor
 SELECT CTN.ID_CONTENIDO,CTN.TITULO,CTN.EXTENSION,COUNT(ES_REPRODUCIDO.ID_CONTENIDO) CANTIDAD_VISUALIZACIONES, COUNT(ES_DESCARGADO.ID_CONTENIDO) CANTIDAD_DESCARGADOS
      ,CLF.CATEGORIA
 FROM contenido CTN
@@ -73,7 +73,7 @@ ORDER BY COUNT(ES_REPRODUCIDO.ID_CONTENIDO),COUNT(ES_DESCARGADO.ID_CONTENIDO) DE
 select cat.tipo, count(claf.id_contenido) CANTIDAD_CONTENIDO_CATEGORIA
 from categoria cat
          inner join SE_CLASIFICA_EN claf on claf.ID_CATEGORIA = cat.ID_CATEGORIA
-group by cat.tipo
+group by cat.tipo;
 
 
 -- Busca contenidos por categoria de forma excluyente, es decir que debe tener todas las categorias seleccionadas.
